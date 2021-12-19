@@ -2,7 +2,7 @@
 {
     public class Comum<T>
     {        
-        public T Id { get; set; }
+        public T Id { get; set; } = default!;
         public string IP { get; set; } = "localhost";
         public bool Ativo { get; set; } = true;
         public Guid UsuarioCriacaoId { get; set; }

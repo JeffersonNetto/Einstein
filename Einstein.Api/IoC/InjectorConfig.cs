@@ -1,4 +1,7 @@
-﻿using Einstein.Core;
+﻿using Einstein.Api.Extensions;
+using Einstein.Core;
+using Einstein.Core.Helpers;
+using Einstein.Core.Services;
 using Einstein.Infra;
 using System.Reflection;
 
@@ -10,10 +13,10 @@ namespace Einstein.Api.IoC
         {
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            //services.AddScoped<INotificador, Notificador>();
+            services.AddScoped<INotificador, Notificador>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            //services.AddScoped<IUser, AspNetUser>();
+            services.AddScoped<IUser, AspNetUser>();
 
             services.AddMemoryCache();
 
@@ -23,7 +26,7 @@ namespace Einstein.Api.IoC
                                 .WithScopedLifetime()
                                 .FromAssemblies(Assembly.Load("Einstein.Core"))
                                 .AddClasses(c => c.Where(x => !x.IsAbstract && x.IsClass && x.IsPublic).InNamespaces("Einstein.Core.Services"))
-                                .AsMatchingInterface()
+                                .AsSelf()
                                 .WithScopedLifetime());
         }
     }

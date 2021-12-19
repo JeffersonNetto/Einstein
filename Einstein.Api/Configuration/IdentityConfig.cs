@@ -7,10 +7,8 @@ namespace Einstein.Api.Configuration
     public static class IdentityConfig
     {
         public static IServiceCollection AddIdentityConfiguration(this IServiceCollection services, IConfiguration configuration)
-        {
-            var conn = configuration.GetConnectionString("DefaultConnection");
-
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(conn,
+        {            
+            services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"),
                 builder => builder
                            .EnableRetryOnFailure(3, TimeSpan.FromSeconds(3), null))
                            .EnableSensitiveDataLogging()

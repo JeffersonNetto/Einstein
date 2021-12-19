@@ -13,9 +13,7 @@
         public string Cidade { get; set; }
         public string UF { get; set; }
         public string Latitude { get; set; }
-        public string Longitude { get; set; }
-        public string Login { get; set; }
-        public string Senha { get; set; }
+        public string Longitude { get; set; }                
         public string Facebook { get; set; }
         public string Instagram { get; set; }        
         public Guid UserId { get; set; }        

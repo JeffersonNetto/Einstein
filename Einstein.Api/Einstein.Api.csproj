@@ -26,4 +26,8 @@
     <ProjectReference Include="..\Einstein.Infra\Einstein.Infra.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+
 </Project>
