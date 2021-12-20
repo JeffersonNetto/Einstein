@@ -18,7 +18,7 @@
 
     public class ProfessorHorarioItem
     {
-        public TimeOnly HoraInicio { get; set; }
-        public TimeOnly HoraFim { get; set; }
+        public string HoraInicio { get; set; } = default!;
+        public string HoraFim { get; set; } = default!;
     }
 }

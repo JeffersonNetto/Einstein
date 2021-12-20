@@ -329,29 +329,29 @@ namespace Einstein.Infra.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("bed12cf3-5050-436b-9c9e-134dc9a1660b"),
-                            ConcurrencyStamp = "5da8be1a-ad83-4e99-b041-069b2d48b057",
+                            Id = new Guid("6a690f45-3ce1-48aa-9372-e4b2a5ed7a54"),
+                            ConcurrencyStamp = "382ec20f-bb54-4d75-bf30-abb11725029f",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = new Guid("54aa4e4e-cea2-441d-a988-4dc87fe1790f"),
-                            ConcurrencyStamp = "d92ec6f0-d4e9-4cf1-8010-5ddf960bb08c",
+                            Id = new Guid("1d922821-0040-48d5-99ac-6e22464b1c28"),
+                            ConcurrencyStamp = "8dac5023-1a91-4d39-a272-feac5c85d2de",
                             Name = "Professor",
                             NormalizedName = "PROFESSOR"
                         },
                         new
                         {
-                            Id = new Guid("c5889c26-0d06-42c6-b588-1ba19130b5d3"),
-                            ConcurrencyStamp = "b6bb3d87-7ffc-41db-aa41-322fa3a1b61e",
+                            Id = new Guid("c40d7f7b-52fe-41d3-8bc8-2b4d50c20035"),
+                            ConcurrencyStamp = "bc2aadf3-08e9-4f5e-b91a-74583c5a5235",
                             Name = "Aluno",
                             NormalizedName = "ALUNO"
                         },
                         new
                         {
-                            Id = new Guid("6320e648-8fb6-4ed1-a5bd-8d789d4003ac"),
-                            ConcurrencyStamp = "3dfa4ee9-dc1f-4ad7-bd63-a02f1534d36c",
+                            Id = new Guid("56dfadc9-95c8-4b07-8241-03f92c526501"),
+                            ConcurrencyStamp = "1ccefbb1-fec8-4f02-85b1-2bf1f5bf8ddd",
                             Name = "Secretaria",
                             NormalizedName = "SECRETARIA"
                         });
