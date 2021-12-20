@@ -5,9 +5,9 @@ namespace Einstein.Core.Repositories
 {
     public interface IUsuarioRepository
     {
-        Task<IdentityResult> Adicionar(IdentityUser<Guid> user);
+        Task<IdentityResult> Adicionar(IdentityUser<Guid> user, string password);
         Task<IdentityResult> AlterarSenha(IdentityUser<Guid> user, string senhaAtual, string novaSenha);
-        Task<IdentityResult> Atualizar(IdentityUser<Guid> user);        
+        Task<IdentityResult> Atualizar(IdentityUser<Guid> user);
         Task<IEnumerable<IdentityUser<Guid>>> Obter();
         Task<IdentityUser<Guid>> ObterPorEmail(string email);
         Task<IdentityUser<Guid>> ObterPorId(Guid id);

@@ -76,13 +76,13 @@ namespace Einstein.Api.Controllers
             //claims.Add(new Claim(JwtRegisteredClaimNames.Iat, ToUnixEpochDate(DateTime.UtcNow).ToString(), ClaimValueTypes.Integer64));
 
             foreach (var userRole in userRoles)
-                claims.Add(new Claim(ClaimTypes.Role, userRole));
+                claims.Add(new Claim("role", userRole));
 
             var identityClaims = new ClaimsIdentity();
             identityClaims.AddClaims(claims);
 
             var encodedAccessToken = GetEncodedToken(TokenType.Access, identityClaims);
-            var encodedRefreshToken = GetEncodedToken(TokenType.Refresh, identityClaims);            
+            var encodedRefreshToken = GetEncodedToken(TokenType.Refresh, identityClaims);
 
             var response = new LoginResponseViewModel
             {
@@ -124,7 +124,7 @@ namespace Einstein.Api.Controllers
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
             });
 
-            return tokenHandler.WriteToken(token);            
+            return tokenHandler.WriteToken(token);
         }
     }
 

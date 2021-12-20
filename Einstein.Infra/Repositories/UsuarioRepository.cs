@@ -11,8 +11,8 @@ namespace Einstein.Infra.Repositories
 
         public UsuarioRepository(UserManager<IdentityUser<Guid>> userManager) => _userManager = userManager;
 
-        public async Task<IdentityResult> Adicionar(IdentityUser<Guid> user) =>
-            await _userManager.CreateAsync(user, user.PasswordHash);
+        public async Task<IdentityResult> Adicionar(IdentityUser<Guid> user, string password) =>
+            await _userManager.CreateAsync(user, password);
 
         public async Task<IdentityResult> VincularPerfil(IdentityUser<Guid> user, string newRole, string? oldRole = null)
         {
@@ -48,6 +48,6 @@ namespace Einstein.Infra.Repositories
             var user = await _userManager.FindByIdAsync(id.ToString());
 
             return user != null;
-        }        
+        }
     }
 }

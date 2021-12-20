@@ -7,7 +7,7 @@
         public bool Ativo { get; set; } = true;
         public Guid UsuarioCriacaoId { get; set; }
         public DateTime DataCriacao { get; set; } = DateTime.Now;
-        public Guid UsuarioAlteracaoId { get; set; }
+        public Guid? UsuarioAlteracaoId { get; set; }
         public DateTime? DataAlteracao { get; set; }
     }
 }

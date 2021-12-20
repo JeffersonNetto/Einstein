@@ -16,9 +16,9 @@ namespace Einstein.Core.Services
             _usuarioRepository = usuarioRepository;
         }
 
-        public async Task<Guid?> Adicionar(IdentityUser<Guid> obj, string role)
+        public async Task<Guid?> Adicionar(IdentityUser<Guid> obj, string password, string role)
         {
-            var result = await _usuarioRepository.Adicionar(obj);
+            var result = await _usuarioRepository.Adicionar(obj, password);
 
             if (!result.Succeeded)
             {
@@ -30,7 +30,7 @@ namespace Einstein.Core.Services
 
             var user = await _usuarioRepository.ObterPorEmail(obj.Email);
 
-            await _usuarioRepository.VincularPerfil(user, role);            
+            await _usuarioRepository.VincularPerfil(user, role);
 
             return user.Id;
         }
@@ -48,7 +48,7 @@ namespace Einstein.Core.Services
             await _usuarioRepository.VincularPerfil(user, role);
 
             foreach (PropertyInfo property in typeof(IdentityUser<Guid>).GetProperties())
-                property.SetValue(user, property.GetValue(model, null), null);            
+                property.SetValue(user, property.GetValue(model, null), null);
 
             var result = await _usuarioRepository.Atualizar(user);
 
@@ -85,7 +85,7 @@ namespace Einstein.Core.Services
 
             return true;
         }
-        
+
         public async Task<bool> AlterarSenha(Guid id, AlterarSenhaViewModel model)
         {
             var user = await _usuarioRepository.ObterPorId(id);
@@ -124,7 +124,7 @@ namespace Einstein.Core.Services
         public async Task<bool> UsuarioExiste(Guid id)
         {
             return await _usuarioRepository.UsuarioExiste(id);
-        }        
+        }
     }
 
     public record AlterarSenhaViewModel
