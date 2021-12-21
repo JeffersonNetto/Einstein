@@ -40,5 +40,22 @@ namespace Einstein.Core.Services
 
             await Commit();
         }
+
+        public async Task Atualizar(Professor obj)
+        {
+            var professor = await _repository.GetById(obj.Id);
+
+            if (professor is null)
+            {
+                Notificar("Professor não encontrado no sistema");
+                return;
+            }                
+
+            professor.Nome += " (alterado)";
+            
+            _repository.Update(professor);
+
+            await Commit();
+        }
     }
 }

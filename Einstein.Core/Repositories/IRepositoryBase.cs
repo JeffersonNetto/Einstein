@@ -7,6 +7,6 @@
         Task<IEnumerable<TEntity>> GetAll();
         Task<TEntity?> GetById<T>(T id);
         void Remove(TEntity obj);
-        void Update(TEntity obj);
+        void Update(TEntity obj);        
     }
 }

@@ -11,6 +11,7 @@
         public float? NotaHumanasEnem { get; set; }
         public float? NotaLinguagensEnem { get; set; }
         public bool EstaEmpregado { get; set; }
-        public bool ExAluno { get; set; }        
+        public bool ExAluno { get; set; }
+        public virtual ICollection<Curso> Curso { get; set; } = default!;
     }
 }

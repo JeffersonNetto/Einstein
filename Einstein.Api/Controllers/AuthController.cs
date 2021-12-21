@@ -10,7 +10,7 @@ using System.Text;
 
 namespace Einstein.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class AuthController : MainController
     {

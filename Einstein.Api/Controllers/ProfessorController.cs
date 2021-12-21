@@ -60,39 +60,20 @@ namespace Einstein.Api.Controllers
                 .RuleFor(x => x.TrabalhaEmOutroLocal, f => f.Random.Bool())
                 .RuleFor(x => x.Graduacao, f => f.Random.Word())
                 .RuleFor(x => x.LocalOndeTrabalha, f => f.Random.Word())
-                .RuleFor(x => x.CargaHorariaSemanal, f => f.Random.Float(1, 20))
-                .RuleFor(x => x.Horario, f => new[]
-                {
-                    new ProfessorHorario
-                    {
-                        DiaDaSemana = DayOfWeek.Monday,
-                        Horarios = new[]
-                        {
-                            new ProfessorHorarioItem
-                            {
-                                HoraInicio = DateTime.Now.ToString("HH:mm"),
-                                HoraFim = DateTime.Now.ToString("HH:mm"),
-                            }
-                        },
-                    },
-                    new ProfessorHorario
-                    {
-                        DiaDaSemana = DayOfWeek.Friday,
-                        Horarios = new[]
-                        {
-                            new ProfessorHorarioItem
-                            {
-                                HoraInicio = DateTime.Now.ToString("HH:mm"),
-                                HoraFim = DateTime.Now.ToString("HH:mm"),
-                            }
-                        },
-                    }
-                })
+                .RuleFor(x => x.CargaHorariaSemanal, f => f.Random.Float(1, 20))                
                 .Generate();
 
             await _service.Adicionar(obj);
 
             return CustomResponse(obj);
+        }
+
+        [HttpPut("{id:guid}")]
+        public async Task<IActionResult> Atualizar(Guid id, Professor obj)
+        {            
+            await _service.Atualizar(obj);
+
+            return CustomResponse();
         }
     }
 }

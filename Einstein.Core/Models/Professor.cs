@@ -6,19 +6,9 @@
         public bool TrabalhaEmOutroLocal { get; set; }
         public string? LocalOndeTrabalha { get; set; }
         public float CargaHorariaSemanal { get; set; }    
-        public ICollection<ProfessorHorario>? Horario { get; set; }
-    }
-
-    public class ProfessorHorario
-    {
-        public DayOfWeek DiaDaSemana { get; set; }
-
-        public ICollection<ProfessorHorarioItem> Horarios { get; set; } = default!;
-    }
-
-    public class ProfessorHorarioItem
-    {
-        public string HoraInicio { get; set; } = default!;
-        public string HoraFim { get; set; } = default!;
+        public decimal ValorHoraAula { get; set; }        
+        public virtual ICollection<Curso> Curso { get; set; } = default!;
+        public virtual ICollection<Disciplina> Disciplina { get; set;} = default!;
+        public virtual ICollection<ProfessorConfiguracao> ProfessorConfiguracao { get; set; } = default!;
     }
 }

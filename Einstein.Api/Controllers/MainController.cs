@@ -35,20 +35,27 @@ namespace Einstein.Api.Controllers
         protected void NotificarErro(string mensagem) => _notificador.Handle(new Notificacao(mensagem));
         protected bool OperacaoValida() => !_notificador.TemNotificacao();
 
-        protected ActionResult CustomResponse(object? dados = null)
+        protected ActionResult CustomResponse(object? dados = null, int? successStatusCode = StatusCodes.Status200OK, int? errorStatusCode = StatusCodes.Status400BadRequest)
         {
             if (!OperacaoValida())
             {
-                return BadRequest(new
-                {
-                    Erros = _notificador.ObterNotificacoes().Select(n => n.Mensagem)
-                });
-            }
+                var obj = new { Erros = _notificador.ObterNotificacoes().Select(n => n.Mensagem) };
 
-            return Ok(new
+                return errorStatusCode switch
+                {
+                    StatusCodes.Status422UnprocessableEntity => UnprocessableEntity(obj),
+                    StatusCodes.Status404NotFound => NotFound(obj),
+                    StatusCodes.Status403Forbidden => Forbid(),
+                    _ => BadRequest(obj),
+                };
+            }
+            
+            return successStatusCode switch
             {
-                Dados = dados,
-            });
+                StatusCodes.Status201Created => Created("", new { Dados = dados }),
+                StatusCodes.Status204NoContent => NoContent(),
+                _ => Ok(new { Dados = dados }),
+            };
         }
 
         protected ActionResult CustomResponse(ModelStateDictionary modelState)
@@ -66,41 +73,5 @@ namespace Einstein.Api.Controllers
                 NotificarErro(errorMsg);
             }
         }
-
-        protected ActionResult<T?>? CustomSuccessResponse<T>(int statusCode = StatusCodes.Status200OK, string? mensagem = null, T? dados = null) where T : class
-        {
-            var result = statusCode switch
-            {
-                200 => CustomOkResponse(mensagem, dados),
-                201 => CustomCreatedResponse(mensagem, dados),
-                _ => null,
-            };
-
-            return result;
-        }
-
-        protected ActionResult? CustomErrorResponse(int statusCode = StatusCodes.Status400BadRequest, string? mensagem = null, List<ValidationFailure>? validationFailures = null)
-        {
-            var result = statusCode switch
-            {
-                400 => CustomBadRequestResponse(mensagem, validationFailures),
-                404 => CustomNotFoundResponse(mensagem),
-                _ => null,
-            };
-
-            return result;
-        }
-
-        private ActionResult CustomNotFoundResponse(string? mensagem) =>
-            NotFound(new ErrorResponse { Mensagem = mensagem });
-
-        private ActionResult CustomBadRequestResponse(string? mensagem, List<ValidationFailure>? validationFailures) =>
-            BadRequest(new ErrorResponse(validationFailures) { Mensagem = mensagem });
-
-        private ActionResult<T> CustomCreatedResponse<T>(string? mensagem, T dados) =>
-            Created("", new SuccessResponse<T> { Mensagem = mensagem, Dados = dados });
-
-        private ActionResult<T> CustomOkResponse<T>(string? mensagem, T dados) =>
-            Ok(new SuccessResponse<T> { Mensagem = mensagem, Dados = dados });
     }
 }

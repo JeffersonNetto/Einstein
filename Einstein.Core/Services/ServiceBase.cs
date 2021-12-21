@@ -1,4 +1,5 @@
 ﻿using Einstein.Core.Helpers;
+using Einstein.Core.Repositories;
 using FluentValidation;
 using FluentValidation.Results;
 
@@ -7,12 +8,12 @@ namespace Einstein.Core.Services
     public abstract class ServiceBase
     {
         private readonly INotificador _notificador;
-        private readonly IUnitOfWork _uow;
+        private readonly IUnitOfWork _uow;        
 
         protected ServiceBase(INotificador notificador, IUnitOfWork uow)
         {
             _notificador = notificador;
-            _uow = uow;
+            _uow = uow;            
         }
 
         protected void Notificar(ValidationResult validationResult)
