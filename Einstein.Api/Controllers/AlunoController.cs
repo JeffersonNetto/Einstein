@@ -25,7 +25,7 @@ namespace Einstein.Api.Controllers
 
         [HttpGet]
         public async Task<IEnumerable<Aluno>> Listar()
-        {
+        {                        
             return await _repository.GetAll();
         }
 
@@ -70,6 +70,14 @@ namespace Einstein.Api.Controllers
                 .Generate();
 
             await _service.Adicionar(obj);
+
+            return CustomResponse(obj);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Atualizar(Aluno obj)
+        {           
+            await _service.Atualizar(obj);
 
             return CustomResponse(obj);
         }

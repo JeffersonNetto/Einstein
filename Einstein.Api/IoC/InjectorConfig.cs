@@ -1,8 +1,6 @@
 ﻿using Einstein.Api.Extensions;
-using Einstein.Core;
 using Einstein.Core.Helpers;
 using Einstein.Core.Services;
-using Einstein.Infra;
 using System.Reflection;
 
 namespace Einstein.Api.IoC
@@ -10,9 +8,7 @@ namespace Einstein.Api.IoC
     public static class InjectorConfig
     {
         public static void RegisterServices(this IServiceCollection services)
-        {
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-
+        {            
             services.AddScoped<INotificador, Notificador>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

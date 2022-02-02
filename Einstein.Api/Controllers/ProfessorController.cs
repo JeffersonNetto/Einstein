@@ -71,7 +71,7 @@ namespace Einstein.Api.Controllers
         [HttpPut("{id:guid}")]
         public async Task<IActionResult> Atualizar(Guid id, Professor obj)
         {            
-            await _service.Atualizar(obj);
+            
 
             return CustomResponse();
         }

@@ -1,6 +1,8 @@
 ﻿using Einstein.Api.Configuration;
 using Einstein.Api.IoC;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using MongoDB.Driver;
 
 namespace Einstein.Api
 {
@@ -13,10 +15,10 @@ namespace Einstein.Api
         }
 
         public void ConfigureServices(IServiceCollection services)
-        {            
-            services.AddEndpointsApiExplorer();                        
+        {
+            services.AddEndpointsApiExplorer();
 
-            services.AddIdentityConfiguration(Configuration);
+            services.AddMongoDbConfiguration(Configuration);
 
             services.AddJwtConfiguration(Configuration);
 
@@ -39,8 +41,8 @@ namespace Einstein.Api
             services.AddSwaggerConfiguration();
         }
 
-        public void Configure(WebApplication app) 
-        {                     
+        public void Configure(WebApplication app)
+        {
             app.UseMvcConfiguration();
         }
     }
